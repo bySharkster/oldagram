@@ -30,10 +30,6 @@ const posts = [
 
 const feedElement = document.getElementById("feed");
 
-
-function createPost(post) {
-    
-/* Post Article */
 const articleElement = document.createElement("article");
 articleElement.classList.add("post");
 
@@ -47,8 +43,8 @@ articleElement.appendChild(postHeaderElement);
 
 const avatarElement = document.createElement("img");
 avatarElement.classList.add("avatar")
-avatarElement.src = post.avatar;
-avatarElement.alt = post.username;
+avatarElement.src = posts[0].avatar;
+avatarElement.alt = posts[0].username;
 
 postHeaderElement.appendChild(avatarElement);
 
@@ -57,11 +53,11 @@ postHeaderElement.appendChild(postHeaderInfoElement);
 
 const postFullNameElement = document.createElement("span");
 postFullNameElement.classList.add("strong")
-postFullNameElement.textContent = post.name;
+postFullNameElement.textContent = posts[0].name;
 
 const postLocationElement = document.createElement("span");
 postLocationElement.classList.add("location")
-postLocationElement.textContent = post.location;
+postLocationElement.textContent = posts[0].location;
 
 postHeaderInfoElement.appendChild(postFullNameElement);
 postHeaderInfoElement.appendChild(postLocationElement);
@@ -72,8 +68,8 @@ postImgElement.classList.add("post-img");
 articleElement.appendChild(postImgElement);
 
 const postImgAsset = document.createElement("img");
-postImgAsset.src = post.post;
-postImgAsset.alt = `Photo by ${post.username}`;
+postImgAsset.src = posts[0].post;
+postImgAsset.alt = `Photo by ${posts[0].username}`;
 postImgElement.appendChild(postImgAsset);
 
 /* Post Footer */
@@ -106,7 +102,7 @@ postFooterElement.appendChild(postFooterActionsElement);
 /* Post Footer Intercations */
 const postFooterInteractionsElement = document.createElement("div");
 postFooterInteractionsElement.classList.add("strong");
-postFooterInteractionsElement.textContent = `${post.likes} likes`;
+postFooterInteractionsElement.textContent = `${posts[0].likes} likes`;
 postFooterElement.appendChild(postFooterInteractionsElement);
 
 /* Post Footer Info */
@@ -115,16 +111,12 @@ postFooterElement.appendChild(postFooterInfoElement);
 
 const postFooterUsernameElement = document.createElement("span");
 postFooterUsernameElement.classList.add("strong");
-postFooterUsernameElement.textContent = post.username;
+postFooterUsernameElement.textContent = posts[0].username;
 postFooterInfoElement.appendChild(postFooterUsernameElement);
 
 const postCaptionElement = document.createElement("span");
 postCaptionElement.classList.add("caption");
-postCaptionElement.textContent = post.comment;
+postCaptionElement.textContent = posts[0].comment;
 postFooterInfoElement.appendChild(postCaptionElement);
 
-}
 
-for (let i =0;i < posts.length; i++) {
-    createPost(posts[i])
-}
