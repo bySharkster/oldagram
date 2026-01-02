@@ -6,7 +6,8 @@ const posts = [
         avatar: "images/avatar-vangogh.jpg",
         post: "images/post-vangogh.jpg",
         comment: "just took a few mushrooms lol",
-        likes: 21
+        likes: 21,
+        isLiked: false
     },
     {
         name: "Gustave Courbet",
@@ -15,7 +16,8 @@ const posts = [
         avatar: "images/avatar-courbet.jpg",
         post: "images/post-courbet.jpg",
         comment: "i'm feelin a bit stressed tbh",
-        likes: 4
+        likes: 4,
+        isLiked: false
     },
         {
         name: "Joseph Ducreux",
@@ -24,18 +26,20 @@ const posts = [
         avatar: "images/avatar-ducreux.jpg",
         post: "images/post-ducreux.jpg",
         comment: "gm friends! which coin are YOU stacking up today?? post below and WAGMI!",
-        likes: 152
+        likes: 152,
+        isLiked: false
     }
 ]
 
 const feedElement = document.getElementById("feed");
 
-
-function createPost(post) {
-    
+// Create Post Function
+function createPost(post, i) {
+    const id = `${post.username}-${i}`;
 /* Post Article */
 const articleElement = document.createElement("article");
 articleElement.classList.add("post");
+articleElement.id = id;
 
 feedElement.appendChild(articleElement);
 
@@ -85,11 +89,16 @@ articleElement.appendChild(postFooterElement);
 /* Post Footer Actions */
 const postFooterActionsElement = document.createElement("div");
 postFooterActionsElement.classList.add("post-footer-actions");
-const postFooterActionsHeartElement = document.createElement("img");
 /* Heart Icon */
+const postFooterActionHeartButton = document.createElement("button");
+postFooterActionHeartButton.classList.add("post-footer-action-btn");
+postFooterActionHeartButton.addEventListener("click", () => toggleLike(post, id) );
+const postFooterActionsHeartElement = document.createElement("img");
 postFooterActionsHeartElement.src = "images/icon-heart.png";
 postFooterActionsHeartElement.alt = `Heart Icon`;
-postFooterActionsElement.appendChild(postFooterActionsHeartElement);
+postFooterActionsHeartElement.classList.add("heart-icon")
+postFooterActionHeartButton.appendChild(postFooterActionsHeartElement);
+postFooterActionsElement.appendChild(postFooterActionHeartButton);
 /* Comment Icon */
 const postFooterActionsCommentElement = document.createElement("img");
 postFooterActionsCommentElement.src = "images/icon-comment.png";
@@ -103,9 +112,9 @@ postFooterActionsElement.appendChild(postFooterActionsDMElement);
 
 postFooterElement.appendChild(postFooterActionsElement);
 
-/* Post Footer Intercations */
+/* Post Footer Interactions */
 const postFooterInteractionsElement = document.createElement("div");
-postFooterInteractionsElement.classList.add("strong");
+postFooterInteractionsElement.classList.add("strong", "likes-count");
 postFooterInteractionsElement.textContent = `${post.likes} likes`;
 postFooterElement.appendChild(postFooterInteractionsElement);
 
@@ -125,6 +134,45 @@ postFooterInfoElement.appendChild(postCaptionElement);
 
 }
 
+// Loop through posts and create posts
 for (let i =0;i < posts.length; i++) {
-    createPost(posts[i])
+    createPost(posts[i], i)
 }
+
+// Like Post Function
+function likePost(post, id) {
+    console.log(`${post.username} liked your post with id ${id}`);
+    post.likes++;
+    post.isLiked = true;
+
+    const postFooterActionHeartImage = document.querySelector(`#${id} .heart-icon`);
+    postFooterActionHeartImage.src = "images/icon-heart-active.png";
+    postFooterActionHeartImage.alt = "Red Heart Icon";
+
+    const postFooterInteractionsElement = document.querySelector(`#${id} .likes-count`);
+    postFooterInteractionsElement.textContent = `${post.likes} likes`;
+}
+
+// Dislike Post Function
+function dislikePost(post, id) {
+    console.log(`${post.username} disliked your post with id ${id}`);
+    post.likes--;
+    post.isLiked = false;
+
+    const postFooterActionHeartImage = document.querySelector(`#${id} .heart-icon`);
+    postFooterActionHeartImage.src = "images/icon-heart.png";
+    postFooterActionHeartImage.alt = "Outline Heart Icon";
+    
+    const postFooterInteractionsElement = document.querySelector(`#${id} .likes-count`);
+    postFooterInteractionsElement.textContent = `${post.likes} likes`;
+}
+
+function toggleLike(post, id) {
+    if (post.isLiked) {
+        dislikePost(post, id);
+    } else {
+        likePost(post, id);
+    }
+}
+
+
