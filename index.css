@@ -1,5 +1,84 @@
 html, body {
     margin: 0;
     padding: 0;
+    font-size: 13px
 }
 
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #C6C6C6;
+    padding: 16px;
+}
+
+.logo {
+    width: 127px;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+
+/* Feed Container Styles */
+.feed-container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 630px;
+}
+
+/* Post Styles */
+.post-header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.post-header div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 8px;
+}
+
+.post-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.post-footer {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 10px 16px;
+    gap: 12px;
+}
+
+.post-footer-actions {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.post-footer-actions img {
+    width: 24px;
+    height: 24px;
+    padding-right: 8px;
+}
+
+
+
+/* Utility Classes */
+.strong {
+    font-weight: bold;
+}
+
+.location {
+    font-size: 12px;
+}
