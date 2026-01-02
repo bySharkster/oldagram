@@ -74,6 +74,8 @@ header {
 
 
 
+
+
 /* Utility Classes */
 .strong {
     font-weight: bold;
@@ -81,4 +83,8 @@ header {
 
 .location {
     font-size: 12px;
+}
+
+.caption {
+    margin-left: 4px;
 }
